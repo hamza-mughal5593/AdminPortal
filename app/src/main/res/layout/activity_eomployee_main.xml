@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Employee.EomployeeMainActivity">
+
+    <LinearLayout
+        android:paddingBottom="@dimen/_5sdp"
+        android:paddingTop="@dimen/_5sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/back_btn"
+            android:padding="@dimen/_2sdp"
+            android:layout_width="@dimen/_24sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:src="@drawable/ic_baseline_arrow_back_24"
+            app:tint="@color/black" />
+        <TextView
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Employee Name"
+            android:layout_gravity="center_vertical"
+            android:fontFamily="@font/font_bold"
+            android:textSize="@dimen/_14sdp"
+            android:layout_marginStart="@dimen/_10sdp"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_10sdp"
+        android:background="@drawable/toolbar_dropshadow" />
+
+    <TextView
+        android:layout_marginBottom="@dimen/_20sdp"
+        android:id="@+id/checkin"
+        android:layout_marginEnd="@dimen/_30sdp"
+        android:layout_marginStart="@dimen/_30sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_bg"
+        android:textSize="@dimen/_11sdp"
+        android:fontFamily="@font/font_reg"
+        android:gravity="center"
+        android:paddingTop="@dimen/_10sdp"
+        android:paddingBottom="@dimen/_10sdp"
+        android:text="Check In"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:layout_marginBottom="@dimen/_20sdp"
+        android:id="@+id/checkout"
+        android:layout_marginEnd="@dimen/_30sdp"
+        android:layout_marginStart="@dimen/_30sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_bg"
+        android:textSize="@dimen/_11sdp"
+        android:fontFamily="@font/font_reg"
+        android:gravity="center"
+        android:paddingTop="@dimen/_10sdp"
+        android:paddingBottom="@dimen/_10sdp"
+        android:text="Check Out"
+        android:textColor="@color/white" />
+    <TextView
+        android:layout_marginBottom="@dimen/_20sdp"
+        android:id="@+id/login_btn"
+        android:layout_marginEnd="@dimen/_30sdp"
+        android:layout_marginStart="@dimen/_30sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_bg"
+        android:textSize="@dimen/_11sdp"
+        android:fontFamily="@font/font_reg"
+        android:gravity="center"
+        android:paddingTop="@dimen/_10sdp"
+        android:paddingBottom="@dimen/_10sdp"
+        android:text="History"
+        android:textColor="@color/white" />
+
+</LinearLayout>

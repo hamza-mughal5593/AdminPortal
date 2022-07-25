@@ -3,16 +3,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.admin.portal">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
+        android:exported="true"
         android:fullBackupContent="@xml/backup_rules"
+        android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:largeHeap="true"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
+        android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/Theme.AdminPortal"
+        android:usesCleartextTraffic="true"
+        android:windowSoftInputMode="stateHidden|adjustResize"
         tools:targetApi="31">
+        <activity
+            android:name=".EomployeeMainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LoginMain.SignupActivity"
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
