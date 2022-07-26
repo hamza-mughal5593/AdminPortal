@@ -18,12 +18,11 @@ public class PreferenceUtils {
     }
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     @Nullable
-    public static android.util.Size getCameraXTargetResolution(Context context, int lensfacing) {
+    public static android.util.Size getCameraXTargetResolution( int lensfacing) {
         Preconditions.checkArgument(
                 lensfacing == CameraSelector.LENS_FACING_BACK
                         || lensfacing == CameraSelector.LENS_FACING_FRONT);
-        String prefKey =
-                lensfacing == CameraSelector.LENS_FACING_BACK
+        String prefKey = lensfacing == CameraSelector.LENS_FACING_BACK
 //                        ? context.getString(R.string.pref_key_camerax_rear_camera_target_resolution)
                         ? "crctas"
 //                        : context.getString(R.string.pref_key_camerax_front_camera_target_resolution);

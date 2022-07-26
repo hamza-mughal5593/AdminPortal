@@ -118,10 +118,11 @@ public class BarcodeScannerProcessor extends VisionProcessorBase<List<Barcode>> 
             Paper.book().write("barcode", barcode);
             Paper.book().write("format", format);
 
+            Toast.makeText(context, "Check-In Successfully", Toast.LENGTH_LONG).show();
+            activity.finish();
 
-
-            Intent intent = new Intent(context, ResultActivity.class);
-                context.startActivity(intent);
+//            Intent intent = new Intent(context, ResultActivity.class);
+//                context.startActivity(intent);
 
 
         }

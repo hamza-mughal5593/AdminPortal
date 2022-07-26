@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/white"
     tools:context=".Employee.EomployeeMainActivity">
 
     <LinearLayout
@@ -41,6 +42,7 @@
         android:background="@drawable/toolbar_dropshadow" />
 
     <TextView
+        android:layout_marginTop="@dimen/_50sdp"
         android:layout_marginBottom="@dimen/_20sdp"
         android:id="@+id/checkin"
         android:layout_marginEnd="@dimen/_30sdp"

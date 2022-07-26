@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Window
 import android.widget.Toast
+import com.admin.portal.Employee.EomployeeMainActivity
 import com.admin.portal.MainActivity
 import com.admin.portal.Utils.MySingleton
 import com.admin.portal.databinding.ActivityLoginBinding
@@ -28,9 +29,9 @@ class LoginActivity : AppCompatActivity() {
 
 
         binding.loginBtn.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-//            startActivity(intent)
-//            finish()
+            val intent = Intent(this, EomployeeMainActivity::class.java)
+            startActivity(intent)
+            finish()
 
             if (binding.etEmail.text.toString().isNotEmpty()
                 && binding.etPassword.text.toString().isNotEmpty()){
@@ -46,6 +47,13 @@ class LoginActivity : AppCompatActivity() {
         }
 
         binding.backBtn.setOnClickListener {
+            finish()
+        }
+
+
+        binding.registrBtn.setOnClickListener {
+            val intent = Intent(this, SignupActivity::class.java)
+            startActivity(intent)
             finish()
         }
 
@@ -92,14 +100,14 @@ class LoginActivity : AppCompatActivity() {
                         Paper.book().write("profile_image",data.getString("image"))
                         if (lifestyle.isNotEmpty())
                         {
-                            Paper.book().write("lifestyle",lifestyle)
-                            val intent = Intent(this, CalculateResultActivity::class.java)
-                            startActivity(intent)
-                            finish()
+//                            Paper.book().write("lifestyle",lifestyle)
+//                            val intent = Intent(this, CalculateResultActivity::class.java)
+//                            startActivity(intent)
+//                            finish()
                         }else{
-                            val intent = Intent(this, MainActivity::class.java)
-                            startActivity(intent)
-                            finish()
+//                            val intent = Intent(this, MainActivity::class.java)
+//                            startActivity(intent)
+//                            finish()
                         }
 
 
