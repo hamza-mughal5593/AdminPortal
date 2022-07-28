@@ -29,9 +29,9 @@ class LoginActivity : AppCompatActivity() {
 
 
         binding.loginBtn.setOnClickListener {
-            val intent = Intent(this, EomployeeMainActivity::class.java)
-            startActivity(intent)
-            finish()
+//            val intent = Intent(this, EomployeeMainActivity::class.java)
+//            startActivity(intent)
+//            finish()
 
             if (binding.etEmail.text.toString().isNotEmpty()
                 && binding.etPassword.text.toString().isNotEmpty()){
@@ -75,7 +75,7 @@ class LoginActivity : AppCompatActivity() {
 
         val RegistrationRequest: StringRequest = object : StringRequest(
             Method.POST,
-            "http://www.greensave.co/",
+            "https://ayadimarble.com/checkin/",
             Response.Listener
             { response ->
                 try {
@@ -93,21 +93,19 @@ class LoginActivity : AppCompatActivity() {
                             Toast.LENGTH_SHORT
                         ).show()
                         val data = objects.getJSONObject("data")
-                        val lifestyle = data.getString("lifestyle")
-                        Paper.book().write("email",data.getString("email"))
+                        val account_type = data.getString("account_type")
+                        Paper.book().write("id",data.getString("id"))
                         Paper.book().write("name",data.getString("name"))
-                        Paper.book().write("account_type",data.getString("account_type"))
-                        Paper.book().write("profile_image",data.getString("image"))
-                        if (lifestyle.isNotEmpty())
+                        Paper.book().write("account_type",account_type)
+                        if (account_type.equals("Employee"))
                         {
-//                            Paper.book().write("lifestyle",lifestyle)
-//                            val intent = Intent(this, CalculateResultActivity::class.java)
-//                            startActivity(intent)
-//                            finish()
+                            val intent = Intent(this, EomployeeMainActivity::class.java)
+                            startActivity(intent)
+                            finish()
                         }else{
-//                            val intent = Intent(this, MainActivity::class.java)
-//                            startActivity(intent)
-//                            finish()
+                            val intent = Intent(this, MainActivity::class.java)
+                            startActivity(intent)
+                            finish()
                         }
 
 
@@ -156,8 +154,6 @@ class LoginActivity : AppCompatActivity() {
                 header["apikey"]= "dwamsoft12345"
                 header["email"]= binding.etEmail.text.toString()
                 header["password"]=binding.etPassword.text.toString()
-                header["lat"]= Paper.book().read("latitude", 0.0).toString()
-                header["lng"]=Paper.book().read("longitude", 0.0).toString()
 
                 return header
             }

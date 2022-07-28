@@ -1,11 +1,29 @@
 package com.admin.portal
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.admin.portal.Admin.UserListActivity
+import com.admin.portal.Employee.EomployeeMainActivity
+import com.admin.portal.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+    lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        binding.empBtn.setOnClickListener{
+            val intent = Intent(this, UserListActivity::class.java)
+            intent.putExtra("user_type","emp")
+            startActivity(intent)
+        }
+        binding.supBtn.setOnClickListener{
+            val intent = Intent(this, UserListActivity::class.java)
+            intent.putExtra("user_type","sup")
+            startActivity(intent)
+        }
+
     }
 }

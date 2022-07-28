@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.admin.portal.Utils.UtilsJava;
 import com.google.android.gms.tasks.Task;
 import com.google.mlkit.vision.barcode.Barcode;
 import com.google.mlkit.vision.barcode.BarcodeScanner;
@@ -27,13 +28,15 @@ public class BarcodeScannerProcessor extends VisionProcessorBase<List<Barcode>> 
     //    Activity activity;
     Context context;
     Activity activity;
+    String scantype;
 
 
 
-    public BarcodeScannerProcessor(Context context, Activity activity) {
+    public BarcodeScannerProcessor(Context context, Activity activity, String scantype) {
         super(context);
         this.context = context;
         this.activity = activity;
+        this.scantype = scantype;
 //        this.activity = activity;
         // Note that if you know which format of barcode your app is dealing with, detection will be
         // faster to specify the supported barcode formats one by one, e.g.
@@ -112,13 +115,21 @@ public class BarcodeScannerProcessor extends VisionProcessorBase<List<Barcode>> 
 
 
 
-            Paper.init(context);
-            Paper.book().write("type", type);
-            Paper.book().write("data", data);
-            Paper.book().write("barcode", barcode);
-            Paper.book().write("format", format);
+//            Paper.init(context);
+//            Paper.book().write("type", type);
+//            Paper.book().write("data", data);
+//            Paper.book().write("barcode", barcode);
+//            Paper.book().write("format", format);
 
-            Toast.makeText(context, "Check-In Successfully", Toast.LENGTH_LONG).show();
+            UtilsJava.PlayVibrate500(activity,1000);
+            UtilsJava.Playsound(activity, "beep.mp3");
+
+            if (scantype.equals("checkin")){
+
+                Toast.makeText(context, "Check-In Successfully", Toast.LENGTH_LONG).show();
+            }else {
+                Toast.makeText(context, "Check-Out Successfully", Toast.LENGTH_LONG).show();
+            }
             activity.finish();
 
 //            Intent intent = new Intent(context, ResultActivity.class);

@@ -21,6 +21,7 @@ import com.admin.portal.Utils.ScanUtils.*
 import com.admin.portal.databinding.ActivityScannerBinding
 import com.google.mlkit.common.MlKitException
 
+
 class ScannerActivity : AppCompatActivity() {
     lateinit var binding: ActivityScannerBinding
 
@@ -66,12 +67,17 @@ class ScannerActivity : AppCompatActivity() {
     private val selectedSize = SIZE_SCREEN
 
     var isLandScape = false
+    var scantype = ""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityScannerBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
+        val intent = intent
+        scantype = intent.getStringExtra("scantype").toString()
 
 
 
@@ -101,26 +107,6 @@ class ScannerActivity : AppCompatActivity() {
 
     }
 
-    private fun getTargetedWidthHeight(): Pair<Int, Int>? {
-        val targetWidth: Int
-        val targetHeight: Int
-        when (selectedSize) {
-         SIZE_SCREEN -> {
-                targetWidth = if (isLandScape) 640 else 480
-                targetHeight = if (isLandScape) 480 else 640
-            }
-            SIZE_640_480 -> {
-                targetWidth = if (isLandScape) 640 else 480
-                targetHeight = if (isLandScape) 480 else 640
-            }
-            SIZE_1024_768 -> {
-                targetWidth = if (isLandScape) 1024 else 768
-                targetHeight = if (isLandScape) 768 else 1024
-            }
-            else -> throw java.lang.IllegalStateException("Unknown size")
-        }
-        return Pair(targetWidth, targetHeight)
-    }
 
     override fun onResume() {
         super.onResume()
@@ -208,7 +194,7 @@ class ScannerActivity : AppCompatActivity() {
                         "Using Barcode Detector Processor"
                     )
                     imageProcessor =
-                        BarcodeScannerProcessor(this, this)
+                        BarcodeScannerProcessor(this, this,scantype)
                 }
                 else -> throw IllegalStateException("Invalid model name")
             }
