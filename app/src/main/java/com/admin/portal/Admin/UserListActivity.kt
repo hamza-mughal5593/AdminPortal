@@ -12,7 +12,6 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.admin.portal.Model.Alluser
-import com.admin.portal.Model.ItemsViewModel
 import com.admin.portal.R
 import com.admin.portal.Utils.MySingleton
 import com.admin.portal.databinding.ActivityUserListBinding
@@ -49,7 +48,7 @@ class UserListActivity : AppCompatActivity() {
         binding.backBtn.setOnClickListener { onBackPressed() }
 
 
-
+        allusers()
 
     }
 
