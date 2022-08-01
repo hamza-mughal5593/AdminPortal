@@ -16,7 +16,10 @@ import com.google.mlkit.vision.barcode.BarcodeScanner;
 import com.google.mlkit.vision.barcode.BarcodeScanning;
 import com.google.mlkit.vision.common.InputImage;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import io.paperdb.Paper;
 
@@ -127,6 +130,10 @@ public class BarcodeScannerProcessor extends VisionProcessorBase<List<Barcode>> 
             if (scantype.equals("checkin")){
 
                 Toast.makeText(context, "Check-In Successfully", Toast.LENGTH_LONG).show();
+                SimpleDateFormat sdf =new SimpleDateFormat("hh:mm a", Locale.getDefault());
+                String currentDateandTime = sdf.format(new Date());
+
+                Paper.book().write("check_in",currentDateandTime);
             }else {
                 Toast.makeText(context, "Check-Out Successfully", Toast.LENGTH_LONG).show();
             }

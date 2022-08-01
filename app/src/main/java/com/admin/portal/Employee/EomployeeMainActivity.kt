@@ -35,7 +35,7 @@ class EomployeeMainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.checkin.setOnClickListener {
-            if (binding.checkin.text.toString().isEmpty()){
+            if (binding.totalHour.text.toString().isEmpty()){
                 val intent = Intent(this, ScannerActivity::class.java)
                 intent.putExtra("scantype", "checkin")
                 startActivity(intent)
@@ -45,13 +45,13 @@ class EomployeeMainActivity : AppCompatActivity() {
 
         }
         binding.checkout.setOnClickListener {
-            if (binding.checkout.text.toString().isEmpty()){
+//            if (binding.checkout.text.toString().isEmpty()){
             val intent = Intent(this, ScannerActivity::class.java)
             intent.putExtra("scantype", "checkout")
             startActivity(intent)
-            }else{
-                Toast.makeText(this,"Already Check Out",Toast.LENGTH_LONG).show()
-            }
+//            }else{
+//                Toast.makeText(this,"Already Check Out",Toast.LENGTH_LONG).show()
+//            }
 
         }
         binding.histry.setOnClickListener {
@@ -61,29 +61,54 @@ class EomployeeMainActivity : AppCompatActivity() {
 //            finish()
         }
         binding.name.text = Paper.book().read("name", "User Name")
+        binding.checkin.text = Paper.book().read("check_in", "")
 
 
-        val sdf = SimpleDateFormat("hh:mm a", Locale.getDefault())
-        val currentDateandTime = sdf.format(Date())
 
-
-        val simpleDateFormat = SimpleDateFormat("hh:mm a")
-
-        var date1 = simpleDateFormat.parse("08:00 AM")
-        var date2 = simpleDateFormat.parse(currentDateandTime)
-
-        val difference: Long = date2.time - date1.time
-        var days = (difference / (1000 * 60 * 60 * 24)).toInt()
-        var hours = ((difference - 1000 * 60 * 60 * 24 * days) / (1000 * 60 * 60))
-        var min = (difference - 1000 * 60 * 60 * 24 * days - 1000 * 60 * 60 * hours) / (1000 * 60)
-        hours = if (hours < 0) -hours else hours
-        min = if (min < 0) -min else min
-        Log.i("======= Hours", " :: $hours  == $min")
-
-        binding.totalHour.text= "$hours:$min"
 
 
     }
 
+    override fun onResume() {
+        super.onResume()
 
+
+
+        var checkin:String? = Paper.book().read("check_in", "")
+        if (checkin!!.isNotEmpty()){
+
+
+
+
+
+
+
+
+
+            val sdf = SimpleDateFormat("hh:mm a", Locale.getDefault())
+            val currentDateandTime = sdf.format(Date())
+
+
+            val simpleDateFormat = SimpleDateFormat("hh:mm a")
+
+            var date1 = simpleDateFormat.parse(checkin)
+            var date2 = simpleDateFormat.parse(currentDateandTime)
+
+            val difference: Long = date2.time - date1.time
+            var days = (difference / (1000 * 60 * 60 * 24)).toInt()
+            var hours = ((difference - 1000 * 60 * 60 * 24 * days) / (1000 * 60 * 60))
+            var min = (difference - 1000 * 60 * 60 * 24 * days - 1000 * 60 * 60 * hours) / (1000 * 60)
+            hours = if (hours < 0) -hours else hours
+            min = if (min < 0) -min else min
+            Log.i("======= Hours", " :: $hours  == $min")
+
+            binding.totalHour.text= "$hours:$min"
+
+
+
+
+
+        }
+
+    }
 }
