@@ -14,21 +14,6 @@ class EomployeeMainActivity : AppCompatActivity() {
     lateinit var binding: ActivityEomployeeMainBinding
 
 
-    private var date = ""
-    private var time = ""
-    private var currentDate: Long? = null
-    private var currentTime: Long? = null
-    var boostTme: Long? = null
-    var boostDate: Long? = null
-    val ONE_MINUTE_IN_MILLIS: Long = 60000 //millisecs
-
-    private var now: Calendar? = null
-    var t: Long? = null
-    var afterAddingTime: Long? = null
-    private val cpuTemp = 0f
-    private val checkBackDialog = false
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityEomployeeMainBinding.inflate(layoutInflater)

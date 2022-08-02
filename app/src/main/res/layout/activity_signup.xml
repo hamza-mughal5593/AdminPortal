@@ -45,7 +45,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="@dimen/_10sdp"
                         android:fontFamily="@font/font_bold"
-                        android:text="Sign Up"
+                        android:text="Add User"
 
                         android:textColor="@color/black"
                         android:textSize="@dimen/_14sdp" />
@@ -145,9 +145,9 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:background="@android:color/transparent"
-                                    android:hint="Email"
+                                    android:hint="ID"
                                     android:textColorHint="@color/black"
-                                    android:inputType="textEmailAddress"
+                                    android:inputType="text"
                                     android:textColor="@color/black" />
                             </com.google.android.material.textfield.TextInputLayout>
                         </LinearLayout>
@@ -203,40 +203,7 @@
                             android:background="@color/bordercolor" />
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_20sdp"
-                        android:orientation="vertical">
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_10sdp"
-                            android:gravity="center"
-                            android:orientation="horizontal">
-
-                            <ImageView
-                                android:layout_width="@dimen/_15sdp"
-                                android:layout_height="@dimen/_15sdp"
-                                android:src="@drawable/accounttype" />
-
-                            <Spinner
-
-                                android:id="@+id/accountype"
-                                android:layout_width="match_parent"
-                                android:layout_height="50dp"
-                                android:layout_marginStart="10dp"
-                                android:layout_marginEnd="10dp"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
-                        </LinearLayout>
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:background="@color/bordercolor" />
-                    </LinearLayout>
 
                 </LinearLayout>
             </LinearLayout>
@@ -259,7 +226,7 @@
                     android:gravity="center"
                     android:paddingTop="@dimen/_10sdp"
                     android:paddingBottom="@dimen/_10sdp"
-                    android:text="Sign Up"
+                    android:text="ADD"
                     android:textColor="@color/white" />
 
                 <LinearLayout

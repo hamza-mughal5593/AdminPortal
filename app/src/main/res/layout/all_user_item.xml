@@ -1,75 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
     app:cardElevation="6dp">
 
-    <LinearLayout
-        android:background="@color/white"
+    <RelativeLayout
+        android:id="@+id/mainitem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="5dp">
+        android:background="@color/white"
+        android:orientation="vertical">
 
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:textColor="@color/black"
-                android:fontFamily="@font/font_bold"
-                android:layout_width="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="15dp"
-                android:text="Name"
-                android:textSize="@dimen/_12sdp"
-                android:textStyle="bold" />
-            <TextView
-                android:fontFamily="@font/font_reg"
-                android:textColor="@color/black"
-                android:id="@+id/name"
-                android:layout_width="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="15dp"
+                    android:fontFamily="@font/font_bold"
+                    android:text="Name:"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sdp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="15dp"
+                    android:fontFamily="@font/font_reg"
+                    android:text="Item"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sdp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="15dp"
-                android:text="Item"
-                android:textSize="@dimen/_12sdp"
-                android:textStyle="bold" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="15dp"
+                    android:fontFamily="@font/font_bold"
+                    android:text="User ID:"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sdp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/userid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="15dp"
+                    android:fontFamily="@font/font_reg"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sdp"
+                    android:textStyle="bold" />
+            </LinearLayout>
         </LinearLayout>
+
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:id="@+id/editmain"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/_10sdp"
             android:orientation="horizontal">
-            <TextView
-                android:textColor="@color/black"
-                android:fontFamily="@font/font_bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="15dp"
-                android:text="User ID:"
-                android:textSize="@dimen/_12sdp"
-                android:textStyle="bold" />
-            <TextView
-                android:fontFamily="@font/font_reg"
-                android:textColor="@color/black"
-                android:id="@+id/userid"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="15dp"
-                android:text=""
-                android:textSize="@dimen/_12sdp"
-                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/optionbtn"
+                android:layout_width="@dimen/_22sdp"
+                android:layout_height="@dimen/_25sdp"
+                android:src="@drawable/ic_baseline_edit_24"
+                app:tint="@color/bluecolor" />
         </LinearLayout>
 
-
-    </LinearLayout>
+    </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

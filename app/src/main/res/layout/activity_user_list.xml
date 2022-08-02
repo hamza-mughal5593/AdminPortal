@@ -40,6 +40,23 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/_10sdp"
         android:background="@drawable/toolbar_dropshadow" />
+
+    <TextView
+        android:layout_marginBottom="@dimen/_20sdp"
+        android:id="@+id/add_new"
+        android:layout_marginEnd="@dimen/_30sdp"
+        android:layout_marginStart="@dimen/_30sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_bg"
+        android:textSize="@dimen/_11sdp"
+        android:fontFamily="@font/font_reg"
+        android:gravity="center"
+        android:paddingTop="@dimen/_10sdp"
+        android:paddingBottom="@dimen/_10sdp"
+        android:text="Add new User"
+        android:textColor="@color/white" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"

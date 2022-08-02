@@ -3,15 +3,31 @@ package com.admin.portal.Admin
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.admin.portal.Employee.CustomAdapter
 import com.admin.portal.Model.Alluser
 import com.admin.portal.R
 
-class AllUserAdapter (private val mList: List<Alluser>) : RecyclerView.Adapter<AllUserAdapter.ViewHolder>(){
+
+class AllUserAdapter(
+    private val mList: List<Alluser>,
+    viewItemInterface: RecyclerViewItemInterface
+) : RecyclerView.Adapter<AllUserAdapter.ViewHolder>() {
+
+    private var viewItemInterface: RecyclerViewItemInterface? = null
 
 
+    init {
+        this.viewItemInterface = viewItemInterface;
+    }
+
+
+    interface RecyclerViewItemInterface {
+        fun onItemClick(position: Int, path: Alluser, view: View)
+        fun onMainClick(position: Int, path: Alluser, view: View)
+    }
 
 
     // create new views
@@ -33,7 +49,12 @@ class AllUserAdapter (private val mList: List<Alluser>) : RecyclerView.Adapter<A
         // sets the text to the textview from our itemHolder class
         holder.name.text = ItemsViewModel.name
         holder.userid.text = ItemsViewModel.id
-
+        holder.optionbtn.setOnClickListener {
+            viewItemInterface?.onItemClick(position, ItemsViewModel,it)
+        }
+        holder.mainitem.setOnClickListener {
+            viewItemInterface?.onMainClick(position, ItemsViewModel,it)
+        }
     }
 
     // return the number of the items in the list
@@ -45,8 +66,9 @@ class AllUserAdapter (private val mList: List<Alluser>) : RecyclerView.Adapter<A
     class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
         val name: TextView = itemView.findViewById(R.id.name)
         val userid: TextView = itemView.findViewById(R.id.userid)
+        val optionbtn: ImageView = itemView.findViewById(R.id.optionbtn)
+        val mainitem: RelativeLayout = itemView.findViewById(R.id.mainitem)
     }
-
 
 
 }

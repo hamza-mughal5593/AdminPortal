@@ -14,49 +14,50 @@ import android.view.Window
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import com.admin.portal.Model.Alluser
 import com.admin.portal.Utils.MySingleton
 import com.admin.portal.databinding.ActivitySignupBinding
 import com.android.volley.*
 import com.android.volley.toolbox.StringRequest
+import io.paperdb.Paper
 import org.json.JSONException
 import org.json.JSONObject
 
-class SignupActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
+class SignupActivity : AppCompatActivity() {
     lateinit var binding: ActivitySignupBinding
-
-    var courses = arrayOf<String?>(
-        "Select Account Type", "Admin",
-        "Employee","Supervisor"
-    )
-    var accounttype = 0
-
-    var profile_img: String = ""
-    var profile_img_base: String = "data:image/png;base64,"
+    var user_type = ""
+    var what = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignupBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
+        user_type = intent.getStringExtra("user_type").toString()
+
+
+        var alluser = Paper.book().read<Alluser>("edit_user", null)
+        if (alluser != null) {
+            binding.etname.setText(alluser.name)
+            binding.etEmail.setText(alluser.id)
+            what = "edit_user"
+            Paper.book().delete("edit_user")
+        } else {
+            what = "add_user"
+        }
+
+
 
         binding.signupBtn.setOnClickListener {
 
 
             if (binding.etname.text.toString().isNotEmpty() && binding.etEmail.text.toString()
                     .isNotEmpty() && binding.etPassword.text.toString()
-                    .isNotEmpty() && accounttype != 0
+                    .isNotEmpty()
             ) {
 
-                if (isValidEmail(binding.etEmail.text.toString())) {
-                    if (profile_img.isNotEmpty())
-                        profile_img = ""
-                    profile_img_base=""
-                    signup()
-                } else {
-                    Toast.makeText(
-                        this,
-                        "Please enter valid Email Address",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
+
+                signup()
 
 
             } else {
@@ -71,36 +72,8 @@ class SignupActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         binding.backBtn.setOnClickListener {
             finish()
         }
-
-
-
-
-
-        binding.accountype.onItemSelectedListener = this
-
-        // Create the instance of ArrayAdapter
-        // having the list of courses
-        val ad: ArrayAdapter<*> = ArrayAdapter<Any?>(
-            this,
-            android.R.layout.simple_spinner_item,
-            courses
-        )
-
-        // set simple layout resource file
-        // for each item of spinner
-        ad.setDropDownViewResource(
-            android.R.layout.simple_spinner_dropdown_item
-        )
-
-        // Set the ArrayAdapter (ad) data on the
-        // Spinner which binds data to spinner
-        binding.accountype.adapter = ad
-
     }
 
-    fun isValidEmail(target: CharSequence?): Boolean {
-        return !TextUtils.isEmpty(target) && Patterns.EMAIL_ADDRESS.matcher(target).matches()
-    }
 
     private fun signup() {
 
@@ -115,7 +88,7 @@ class SignupActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         dialog.show()
 
         val RegistrationRequest: StringRequest = object : StringRequest(Method.POST,
-            "http://www.greensave.co/",
+            "https://ayadimarble.com/checkin/",
             Response.Listener
             { response ->
                 try {
@@ -126,14 +99,22 @@ class SignupActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                     val objects = JSONObject(response)
                     val response_code = objects.getInt("success")
                     if (response_code == 1) {
+                        if (what.equals("add_user")) {
+                            Toast.makeText(
+                                this,
+                                "User created Successfully",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        } else {
+                            Toast.makeText(
+                                this,
+                                "Updated Successfully",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
 
-                        Toast.makeText(
-                            this,
-                            "Signup Successfully",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                        val intent = Intent(this, LoginActivity::class.java)
-                        startActivity(intent)
+//                        val intent = Intent(this, LoginActivity::class.java)
+//                        startActivity(intent)
                         finish()
                     } else {
                         Toast.makeText(
@@ -176,12 +157,12 @@ class SignupActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             override fun getParams(): MutableMap<String, String> {
                 val header: MutableMap<String, String> = HashMap()
 
-                header["do"] = "add_user"
+                header["do"] = what
                 header["apikey"] = "dwamsoft12345"
                 header["name"] = binding.etname.text.toString()
                 header["email"] = binding.etEmail.text.toString()
                 header["password"] = binding.etPassword.text.toString()
-                header["account_type"] = courses[accounttype].toString()
+                header["account_type"] = "Admin"
 
                 return header
             }
@@ -194,26 +175,6 @@ class SignupActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         )
         MySingleton.getInstance(this).addToRequestQueue(RegistrationRequest)
     }
-
-
-    override fun onItemSelected(
-        parent: AdapterView<*>?,
-        view: View, position: Int,
-        id: Long
-    ) {
-        // make toastof name of course
-        // which is selected in spinner
-
-        accounttype = position
-//        Toast.makeText(
-//            applicationContext,
-//            courses[position],
-//            Toast.LENGTH_LONG
-//        )
-//            .show()
-    }
-
-    override fun onNothingSelected(parent: AdapterView<*>?) {}
 
 
 }
