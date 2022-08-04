@@ -1,5 +1,7 @@
 package com.admin.portal.Admin
 
+import android.content.Intent
+import android.opengl.Visibility
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +11,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.admin.portal.Model.Alluser
 import com.admin.portal.R
+import io.paperdb.Paper
 
 
 class AllUserAdapter(
@@ -55,6 +58,12 @@ class AllUserAdapter(
         holder.mainitem.setOnClickListener {
             viewItemInterface?.onMainClick(position, ItemsViewModel,it)
         }
+
+
+        if (!Paper.book().read("admin",true)!!){
+            holder.optionbtn.visibility = View.GONE
+        }
+
     }
 
     // return the number of the items in the list

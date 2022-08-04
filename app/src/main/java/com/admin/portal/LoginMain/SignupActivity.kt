@@ -2,17 +2,11 @@ package com.admin.portal.LoginMain
 
 import com.admin.portal.R
 import android.app.Dialog
-import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.TextUtils
-import android.util.Patterns
-import android.view.View
 import android.view.Window
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import android.widget.Toast
 import com.admin.portal.Model.Alluser
 import com.admin.portal.Utils.MySingleton
@@ -42,7 +36,12 @@ class SignupActivity : AppCompatActivity() {
             binding.etEmail.setText(alluser.id)
             what = "edit_user"
             Paper.book().delete("edit_user")
+
+            binding.signupBtn.text = "Update"
+            binding.toolText.text = "Update User"
+
         } else {
+            binding.signupBtn.text = "Add User"
             what = "add_user"
         }
 
@@ -57,7 +56,7 @@ class SignupActivity : AppCompatActivity() {
             ) {
 
 
-                signup()
+                signup(alluser!!.user_id)
 
 
             } else {
@@ -75,7 +74,7 @@ class SignupActivity : AppCompatActivity() {
     }
 
 
-    private fun signup() {
+    private fun signup(userId: String) {
 
         val dialog = Dialog(this)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -163,6 +162,9 @@ class SignupActivity : AppCompatActivity() {
                 header["email"] = binding.etEmail.text.toString()
                 header["password"] = binding.etPassword.text.toString()
                 header["account_type"] = "Admin"
+                if (what.equals("edit_user")){
+                    header["user_id"] = userId
+                }
 
                 return header
             }

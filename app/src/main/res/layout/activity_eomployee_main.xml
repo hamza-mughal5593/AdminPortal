@@ -123,7 +123,7 @@
                 <TextView
                     android:fontFamily="@font/font_reg"
                     android:textColor="@color/black"
-                    android:id="@+id/check_in"
+                    android:id="@+id/check_in_data"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
@@ -152,7 +152,7 @@
                 <TextView
                     android:fontFamily="@font/font_reg"
                     android:textColor="@color/black"
-                    android:id="@+id/check_out"
+                    android:id="@+id/check_out_data"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"

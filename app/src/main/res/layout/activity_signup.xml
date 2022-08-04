@@ -46,7 +46,7 @@
                         android:layout_marginStart="@dimen/_10sdp"
                         android:fontFamily="@font/font_bold"
                         android:text="Add User"
-
+android:id="@+id/tool_text"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_14sdp" />
                 </LinearLayout>

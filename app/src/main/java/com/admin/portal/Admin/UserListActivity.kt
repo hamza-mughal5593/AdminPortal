@@ -31,6 +31,8 @@ class UserListActivity : AppCompatActivity(), AllUserAdapter.RecyclerViewItemInt
     var alluser: ArrayList<Alluser> = ArrayList()
     var user_type = ""
     var account_type = ""
+    var isadmin = false
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,11 +57,14 @@ class UserListActivity : AppCompatActivity(), AllUserAdapter.RecyclerViewItemInt
 
         binding.addNew.setOnClickListener {
             val intent = Intent(this, SignupActivity::class.java)
-            intent.putExtra("user_type",account_type)
+            intent.putExtra("user_type", account_type)
             startActivity(intent)
         }
 
+        isadmin = Paper.book().read("admin", true)!!
 
+        if (!isadmin)
+            binding.addNew.visibility = View.GONE
 
 
     }
@@ -70,7 +75,7 @@ class UserListActivity : AppCompatActivity(), AllUserAdapter.RecyclerViewItemInt
         super.onResume()
     }
 
-    lateinit var adapter:AllUserAdapter
+    lateinit var adapter: AllUserAdapter
     lateinit var dialog: Dialog
     private fun allusers() {
 
@@ -127,7 +132,7 @@ class UserListActivity : AppCompatActivity(), AllUserAdapter.RecyclerViewItemInt
 //                            for (i in 1..20) {
 //                                data.add(ItemsViewModel("2022-07-26 02:50:00", "2022-07-26 02:50:00"))
 //                            }
-                             adapter = AllUserAdapter(alluser, this)
+                            adapter = AllUserAdapter(alluser, this)
                             binding.recyclerview.adapter = adapter
 
 
@@ -204,15 +209,15 @@ class UserListActivity : AppCompatActivity(), AllUserAdapter.RecyclerViewItemInt
         popup.setOnMenuItemClickListener { item ->
 
 
-            if ( item.title.equals("Edit")){
+            if (item.title.equals("Edit")) {
 
-                Paper.book().write("edit_user",path)
+                Paper.book().write("edit_user", path)
                 val intent = Intent(this, SignupActivity::class.java)
-                intent.putExtra("user_type",account_type)
+                intent.putExtra("user_type", account_type)
                 startActivity(intent)
 
-            }else if (item.title.equals("Delete")){
-                deleteuser(path.user_id,position)
+            } else if (item.title.equals("Delete")) {
+                deleteuser(path.user_id, position)
             }
             true
         }
@@ -224,7 +229,7 @@ class UserListActivity : AppCompatActivity(), AllUserAdapter.RecyclerViewItemInt
 
     override fun onMainClick(position: Int, path: Alluser, view: View) {
         val intent = Intent(this, HistoryActivity::class.java)
-        Paper.book().write("edit_user",path)
+        Paper.book().write("edit_user", path)
         startActivity(intent)
     }
 
@@ -265,8 +270,6 @@ class UserListActivity : AppCompatActivity(), AllUserAdapter.RecyclerViewItemInt
                             "Calculated Successfully",
                             Toast.LENGTH_SHORT
                         ).show()
-
-
 
 
                     } else {

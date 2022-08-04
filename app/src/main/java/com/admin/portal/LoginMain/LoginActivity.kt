@@ -34,9 +34,10 @@ class LoginActivity : AppCompatActivity() {
 //            finish()
 
             if (binding.etEmail.text.toString().isNotEmpty()
-                && binding.etPassword.text.toString().isNotEmpty()){
+                && binding.etPassword.text.toString().isNotEmpty()
+            ) {
                 login()
-            }else{
+            } else {
                 Toast.makeText(
                     this,
                     "Enter valid Email and Password",
@@ -85,8 +86,10 @@ class LoginActivity : AppCompatActivity() {
                     }
                     val objects = JSONObject(response)
                     val response_code = objects.getInt("success")
-                    if (response_code == 1) {
 
+
+                    if (response_code == 1) {
+                        val employ = objects.getInt("employ")
                         Toast.makeText(
                             this,
                             "Login Successfully",
@@ -94,15 +97,31 @@ class LoginActivity : AppCompatActivity() {
                         ).show()
                         val data = objects.getJSONObject("data")
                         val account_type = data.getString("account_type")
-                        Paper.book().write("id",data.getString("id"))
-                        Paper.book().write("name",data.getString("name"))
-                        Paper.book().write("account_type",account_type)
-                        if (account_type.equals("Employee"))
-                        {
+                        Paper.book().write("id", data.getString("user_id"))
+                        Paper.book().write("name", data.getString("user_name"))
+                        Paper.book().write("account_type", account_type)
+
+                        if (employ == 1) {
+                            Paper.book().write("check_in", data.getString("check_in"))
+                            Paper.book().write("check_out", data.getString("check_out"))
+                            Paper.book().write("extra_time", data.getString("extra_time"))
+                        }else{
+                            Paper.book().delete("check_in")
+                            Paper.book().delete("check_out")
+                            Paper.book().delete("extra_time")
+                        }
+
+                        if (account_type.equals("Employee")) {
                             val intent = Intent(this, EomployeeMainActivity::class.java)
                             startActivity(intent)
                             finish()
-                        }else{
+                        }else if (account_type.equals("Admin")) {
+                            Paper.book().write("admin",true)
+                            val intent = Intent(this, MainActivity::class.java)
+                            startActivity(intent)
+                            finish()
+                        } else {
+                            Paper.book().write("admin",false)
                             val intent = Intent(this, MainActivity::class.java)
                             startActivity(intent)
                             finish()
@@ -150,10 +169,10 @@ class LoginActivity : AppCompatActivity() {
             override fun getParams(): MutableMap<String, String> {
                 val header: MutableMap<String, String> = HashMap()
 
-                header["do"]= "login"
-                header["apikey"]= "dwamsoft12345"
-                header["email"]= binding.etEmail.text.toString()
-                header["password"]=binding.etPassword.text.toString()
+                header["do"] = "login"
+                header["apikey"] = "dwamsoft12345"
+                header["email"] = binding.etEmail.text.toString()
+                header["password"] = binding.etPassword.text.toString()
 
                 return header
             }
