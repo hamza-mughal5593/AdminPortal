@@ -56,7 +56,7 @@ class SignupActivity : AppCompatActivity() {
             ) {
 
 
-                signup(alluser!!.user_id)
+                signup(alluser?.user_id)
 
 
             } else {
@@ -74,7 +74,7 @@ class SignupActivity : AppCompatActivity() {
     }
 
 
-    private fun signup(userId: String) {
+    private fun signup(userId: String?) {
 
         val dialog = Dialog(this)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -161,9 +161,13 @@ class SignupActivity : AppCompatActivity() {
                 header["name"] = binding.etname.text.toString()
                 header["email"] = binding.etEmail.text.toString()
                 header["password"] = binding.etPassword.text.toString()
-                header["account_type"] = "Admin"
+
                 if (what.equals("edit_user")){
-                    header["user_id"] = userId
+                    header["account_type"] = "Admin"
+                    header["user_id"] = userId!!
+                }else{
+
+                    header["account_type"] = user_type
                 }
 
                 return header

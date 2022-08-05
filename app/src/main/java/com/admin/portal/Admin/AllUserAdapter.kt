@@ -2,6 +2,7 @@ package com.admin.portal.Admin
 
 import android.content.Intent
 import android.opengl.Visibility
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -56,6 +57,7 @@ class AllUserAdapter(
             viewItemInterface?.onItemClick(position, ItemsViewModel,it)
         }
         holder.mainitem.setOnClickListener {
+            Log.e("12121212", "onBindViewHolder: ${ItemsViewModel.user_id}]", )
             viewItemInterface?.onMainClick(position, ItemsViewModel,it)
         }
 

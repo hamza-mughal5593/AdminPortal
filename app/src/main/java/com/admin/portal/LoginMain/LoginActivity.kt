@@ -99,6 +99,7 @@ class LoginActivity : AppCompatActivity() {
                         val account_type = data.getString("account_type")
                         Paper.book().write("id", data.getString("user_id"))
                         Paper.book().write("name", data.getString("user_name"))
+                        Paper.book().write("extratime", data.getString("new_table_extra"))
                         Paper.book().write("account_type", account_type)
 
                         if (employ == 1) {

@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.Window
 import android.widget.PopupMenu
+import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -228,11 +229,131 @@ class UserListActivity : AppCompatActivity(), AllUserAdapter.RecyclerViewItemInt
     }
 
     override fun onMainClick(position: Int, path: Alluser, view: View) {
-        val intent = Intent(this, HistoryActivity::class.java)
-        Paper.book().write("edit_user", path)
-        startActivity(intent)
-    }
 
+        if (!isadmin){
+
+           var dialog = Dialog(this)
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            dialog.setCancelable(false)
+            dialog.setContentView(R.layout.addextra_time)
+            dialog.show()
+
+            var cancel:TextView = dialog.findViewById(R.id.cancel)
+            var yes:TextView = dialog.findViewById(R.id.yes)
+
+
+
+            cancel.setOnClickListener { dialog.dismiss() }
+            yes.setOnClickListener { dialog.dismiss()
+
+                addetratime(path.user_id)
+            }
+
+
+
+
+        }else{
+            val intent = Intent(this, HistoryActivity::class.java)
+            Paper.book().write("edit_user", path)
+            startActivity(intent)
+        }
+
+    }
+    private fun addetratime(userId: String) {
+
+        var dialog: Dialog = Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.setCancelable(false)
+        dialog.setContentView(R.layout.loading_dialog)
+
+
+        dialog.show()
+
+
+        val RegistrationRequest: StringRequest = @RequiresApi(Build.VERSION_CODES.N)
+        object : StringRequest(
+            Method.POST,
+            "https://ayadimarble.com/checkin/",
+            Response.Listener
+            { response ->
+                try {
+
+                    if (dialog.isShowing) {
+                        dialog.dismiss()
+                    }
+                    val objects = JSONObject(response)
+                    val response_code = objects.getInt("success")
+                    if (response_code == 1) {
+
+//                        alluser.removeAt(position)
+//                        adapter.notifyItemRemoved(position)
+//                        adapter.notifyItemRangeChanged(position, alluser.size)
+
+                        Toast.makeText(
+                            this,
+                            "Time Added Successfully",
+                            Toast.LENGTH_SHORT
+                        ).show()
+
+
+                    } else {
+                        Toast.makeText(
+                            this,
+                            objects.getString("message"),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+                }
+                dialog.dismiss()
+            },
+            Response.ErrorListener { volleyError ->
+                dialog.dismiss()
+                var message: String? = null
+                when (volleyError) {
+                    is NetworkError -> {
+                        message = "Cannot connect to Internet...Please check your connection!"
+                    }
+                    is ServerError -> {
+                        message =
+                            "The server could not be found. Please try again after some time!!"
+                    }
+                    is AuthFailureError -> {
+                        message = "Cannot connect to Internet...Please check your connection!"
+                    }
+                    is ParseError -> {
+                        message = "Parsing error! Please try again after some time!!"
+                    }
+                    is NoConnectionError -> {
+                        message = "Cannot connect to Internet...Please check your connection!"
+                    }
+                    is TimeoutError -> {
+                        message = "Connection TimeOut! Please check your internet connection."
+                    }
+                }
+                Toast.makeText(this@UserListActivity, message, Toast.LENGTH_LONG).show()
+            }) {
+            override fun getParams(): MutableMap<String, String> {
+                val header: MutableMap<String, String> = HashMap()
+
+                header["do"] = "employee_extratime"
+                header["apikey"] = "dwamsoft12345"
+                header["employ_id"] = userId
+
+                return header
+            }
+
+        }
+        RegistrationRequest.retryPolicy = DefaultRetryPolicy(
+            25000,
+            DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+            DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+        )
+        MySingleton.getInstance(this).addToRequestQueue(RegistrationRequest)
+    }
 
     private fun deleteuser(userId: String, position: Int) {
 

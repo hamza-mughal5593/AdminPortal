@@ -46,6 +46,7 @@ class EomployeeMainActivity : AppCompatActivity() {
 //            finish()
         }
         binding.name.text = Paper.book().read("name", "User Name")
+        binding.extratime.text = Paper.book().read("extratime", "")
 
 
     }
@@ -55,7 +56,7 @@ class EomployeeMainActivity : AppCompatActivity() {
 
 
         var checkin: String? = Paper.book().read("check_in", "")
-        var checkout: String? = Paper.book().read("check_in", "")
+        var checkout: String? = Paper.book().read("check_out", "")
 
         binding.checkInData.text = checkin
         binding.checkOutData.text = checkout

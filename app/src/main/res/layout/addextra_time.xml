@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/_250sdp"
+    android:layout_height="wrap_content"
+    android:paddingEnd="@dimen/_20sdp"
+    android:paddingStart="@dimen/_20sdp"
+    android:background="@drawable/loading_bg"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/_20sdp"
+    android:paddingBottom="@dimen/_20sdp">
+
+
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/font_med"
+        android:text="Are you sure you want to add 15 minutes?"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_14sdp" />
+<LinearLayout
+    android:layout_marginTop="@dimen/_20sdp"
+    android:layout_gravity="end"
+    android:gravity="end"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <TextView
+        android:id="@+id/cancel"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:fontFamily="@font/font_bold"
+        android:gravity="center"
+        android:text="Cancel"
+        android:textColor="#db4437"
+        android:textSize="@dimen/_14sdp" />
+    <TextView
+        android:id="@+id/yes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:fontFamily="@font/font_bold"
+        android:gravity="center"
+        android:text="YES"
+        android:textColor="#7EDA7E"
+        android:textSize="@dimen/_14sdp" />
+</LinearLayout>
+
+</LinearLayout>
